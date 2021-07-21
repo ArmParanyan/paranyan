@@ -21,7 +21,9 @@ int main()
         if (arr[i] > second_max)
         {
             if(arr[i] == max)
+            {
                  continue;
+            }
                 second_max = arr[i];            
         }
     }
