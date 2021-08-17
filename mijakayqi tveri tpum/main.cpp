@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-void sum(int a, int b)
+int sum(int a, int b)
 {
         if(a > b)
         {
