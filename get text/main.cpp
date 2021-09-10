@@ -25,9 +25,8 @@ string Parces::getText()
 
 int main()
 {
-         Parces p("Hello Word, I am a student");
+        Parces p("Hello Word, I am a student");
         p.PrintText();
-        int k;
-        k = getText()
-        
+        cout << p.getText();
+
 }
