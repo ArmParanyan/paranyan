@@ -5,6 +5,7 @@ class Vhicle
         private:
         string color;
         int weigth;
+        
         public:
         Vhicle(string aColor, int aweight)
         {
@@ -13,27 +14,26 @@ class Vhicle
         }
         Vhicle()
         {
-
+               color = "red";
+                weigth= 10;
         }
         void set_Color(string a)
         {
-                a = "red";
+                color = a;
         }
-        string get_Color(string a)
+        string get_Color()
         {
-                a = "red";
-                return a;
+                return color;
         }
 
         void set_Weight(int a)
         {
-                a = 50;
+                weigth = a;
         }
 
-        int get_Weight(int a)
+        int get_Weight()
         {
-                a = 50;
-                return a;
+                return weigth;
         }
 };
 
@@ -48,12 +48,11 @@ class Bike:public Vhicle
         }
         void set_pedal(int a)
         {
-                a = 2;
+                m_pedal = a;
         }
-        int get_pedal(int a)
+        int get_pedal()
         {
-                a = 2;
-                return a;
+                return m_pedal;
         }
 };
 
