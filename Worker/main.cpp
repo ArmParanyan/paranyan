@@ -1,114 +1,165 @@
 #include <iostream>
+#include <time.h>
 using namespace std;
+enum Post
+{
+        FINANCIAL_DIRECTOR, GENERAL_DIRECTOR, OPERATIONAL_DIRECTOR
+};
+
 class Worker
 {
-        private:
-        string Name;
-        string Fullname;
-        int Salary;
-
+        string name;
+        string fullname;
+        int salary;
         public:
-        Worker(string aName, string aFullname, int aSalary)
+        Worker(string name="", string fullname="", int salary = 0)
         {
-                Name = aName;
-                Fullname = aFullname;
-                Salary = aSalary;
+                this->name = name;
+                this->fullname = fullname;
+                this->salary = salary;
         }
-        Worker()
+        void set_Name(string name)
         {
-
+                this->name = name;
         }
-        void setName()
+        void set_fullname(string fullname)
         {
-                cout << "Set Name Worker" << endl;
+                this->fullname = fullname;
         }
-        string getName()
+        void set_salary(int salary)
         {
-                return "Get Name Worker";
+                this->salary = salary;
         }
-        void setFullname()
+        string get_name()
         {
-                cout << endl;
-                cout << "Set Fullname Worker" << endl;
+                return name;
         }
-        string getFullname()
+        string get_fullname()
         {
-                return "Get Fullname Worker";
+                return fullname;
         }
-        void setSalary()
+        int get_salary()
         {
-                cout << endl;
-                cout << "Set Salary Worker" << endl;
-        }
-        int getSalary()
-        {
-                cout << "Get Salary Worker" << endl;
-                return 120000;
-                
+                return salary;
         }
         virtual void run()
         {
-                cout << "RUN WORKER";
+                cout << "i am working" << endl;
+        }
+        virtual void print()
+        {
+                cout << "Name - " << name << endl << "Fullnmae- " << fullname << endl << "salary - " << salary << endl;
         }
 };
 
-class Engineer: public Worker
+class Engineer:public Worker
 {
-        private:
-        int M_pose;
-
+        int position;
         public:
-        Engineer(string Name, string Fullname, int Salary, int Pose):Worker (Name, Fullname, Salary)
+        Engineer(string name = "", string fullname = "", int salary = 0, int position = 0):Worker(name, fullname, salary)
         {
-                M_pose = Pose;
+                this->position = position;
         }
-
-        void setM_pose()
+        void set_position(int pos)
         {
-                cout << "set M_pose Engineer" << endl;
+                position = pos;
         }
-        int getM_pose()
+        int get_position()
         {
-                return 0;
-                cout << "get M_pose Engineer";
+                return position;
         }
-        virtual void run()
+        void run()
         {
-                cout << "Run Engineer";
+                cout << "I am Engineer" << endl;
+        }
+        void print()
+        {
+                Worker::print();
+                cout << "Position - " << position << endl;
         }
 };
 
 class Manager:public Worker
 {
-        private:
-        int M_status;
-
+        string status;
         public:
-         Manager(string Name, string Fullname, int salary, int status):Worker (Name, Fullname, salary)
-         {
-                 M_status = status;
-         }
+        Manager(string name = "", string fullname = "", int salary = 0, string status = 0):Worker(name, fullname, salary)
+        {
+                this->status = status;
+        }
+        void get_status(string status)
+        {
+                this->status = status;
+        }
+        string get_status()
+        {
+                return status;
+        }
+        void run()
+        {
+                cout << "I am Manager" << endl;
+        }
+        void print()
+        {
+                Worker:print();
+                cout << "Status - " << status << endl;
+        }
+};
 
-         void setStatus()
-         {
-                 cout << "SET STATUS MANAGER";
-         }
-
-         int getStatus()
-         {
-                 cout << "GET STATUS MANAGER";
-                 return 0;
-         }
+class Director:public Worker
+{
+        Post ps;
+        public:
+        Director(string name = "", string fullname = "", int salary = 0, Post p = GENERAL_DIRECTOR)
+        {
+                this->ps = p;
+        }
+        void set_post(Post p)
+        {
+                ps = p;
+        }
+        Post get_post()
+        {
+                return ps;
+        }
+        void run()
+        {
+                cout << "I am director" << endl;
+        }
+        void print()
+        {
+                Worker::print();
+                cout << "Post - " << ps << endl;
+        }
 };
 
 int main()
 {
-        
-
-        Worker * p = new Engineer("Armen", "Paranyan", 120000, 2);
-         p -> run();
-
-
-         
-      
+   string names[4] = {"Armen", "Narek", "Hayk", "Vahe"};
+   Worker* arr[4];
+   srand(time(NULL));
+   for(int i = 0; i < 4; i++)
+   {
+           switch(rand() % 4)
+           {
+                case 1:
+                   arr[i] = new Engineer(names[rand() % 4], "  ", rand() % 10 * 10000);
+                   break;
+                case 2:
+			arr[i] = new Manager(names[rand() % 4], "___", rand() % 10 * 10000, "some status here");
+			break;
+	        case 3:
+			arr[i] = new Director(names[rand() % 4], "___", rand() % 10 * 10000,(Post)(rand()%3));
+			break;
+		default: 
+			arr[i] = new Worker(names[rand() % 4], "___", rand() % 10 * 10000);
+			break;
+           }
+   }     
+   for(int i = 0; i < 4; i++)
+   {
+           arr[i] -> run();
+           arr[i] -> print();
+           cout << endl;
+   }
 }
