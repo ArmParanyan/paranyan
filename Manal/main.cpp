@@ -149,18 +149,23 @@ class Pinguin:public Manal, public Bird
 
 int main()
 {
-        const int size = 4;
-        Eagle* arr[size];
+        const int size = 2;
+        Manal* arr[size];
         srand(time(NULL));
         for(int i = 0; i < size; i++)
         {
-                switch(rand() % 4)
+                switch(rand() % 3)
                 {
                         case 1: 
                         arr[i] = new Eagle(5, 10, 15);
                         break;
                         case 2:
                         arr[i] = new Pinguin(10);
+                        break;
                 }
+        }
+        for(int i = 0; i < 2; i++)
+        {
+                arr[i]->about();
         }
 }
